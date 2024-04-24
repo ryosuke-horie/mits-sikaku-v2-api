@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { cors } from "hono/cors";
-import login from "./login";
-import post from "./post";
-import signup from "./signup";
+import login from "./handlers/login";
+import post from "./handlers/post";
+import signup from "./handlers/signup";
 
 type Bindings = {
 	DB: D1Database;

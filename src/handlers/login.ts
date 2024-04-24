@@ -2,8 +2,8 @@ import { and, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/d1";
 import { Hono } from "hono";
 import { z } from "zod";
-import { users } from "./schema";
-import { token } from "./constants";
+import { users } from "../schema";
+import { token } from "../constants";
 
 type Bindings = {
   DB: D1Database;

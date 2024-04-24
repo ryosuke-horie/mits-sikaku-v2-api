@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { bearerAuth } from "hono/bearer-auth";
-import { token } from "./constants";
+import { token } from "../constants";
 
 type Bindings = {
   DB: D1Database;
