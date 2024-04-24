@@ -5,11 +5,13 @@
     "lint": "bunx @biomejs/biome check --apply src/**/*.ts"
   },
   "dependencies": {
+    "drizzle-orm": "^0.30.9",
     "hono": "^4.2.7"
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.1",
     "@cloudflare/workers-types": "^4.20240403.0",
+    "drizzle-kit": "^0.20.17",
     "wrangler": "^3.47.0"
   }
 }
