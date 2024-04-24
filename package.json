@@ -2,7 +2,7 @@
   "scripts": {
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
-    "lint": "bunx @biomejs/biome check --apply src/**/*.ts"
+    "lint": "bunx @biomejs/biome check --apply src/*.ts"
   },
   "dependencies": {
     "drizzle-orm": "^0.30.9",
