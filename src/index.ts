@@ -1,11 +1,48 @@
 import { Hono } from "hono";
 import { drizzle } from "drizzle-orm/d1";
+import { z } from "zod";
+import { bearerAuth } from "hono/bearer-auth";
+import { users } from "./schema";
 
 type Bindings = {
   DB: D1Database;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+
+// user作成(signup)のスキーマ
+const userSingupSchema = z.object({
+  name: z.string(),
+  email: z.string(),
+  password: z.string(),
+});
+
+// user作成(signup)
+app.post("/api/signup", async (c) => {
+  const formData = await c.req.formData();
+  const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
+
+  const { success } = userSingupSchema.safeParse({ name, email, password });
+
+  if (!success) {
+    return c.json({ error: "Invalid input data" }, 400);
+  }
+
+  const db = drizzle(c.env.DB);
+  const user = await db
+    .insert(users)
+    .values({ name, email, password })
+    .execute();
+
+  return c.json({ message: "User created successfully" });
+});
+
+// Bearer用のトークンを設定
+const token = "honoiscool";
+
+// app.use("/api/*", bearerAuth({ token }));
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
