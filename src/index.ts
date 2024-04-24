@@ -5,12 +5,14 @@ import { bearerAuth } from "hono/bearer-auth";
 import { cors } from "hono/cors";
 import { z } from "zod";
 import { users } from "./schema";
+import post from "./post";
 
 type Bindings = {
   DB: D1Database;
 };
 
 const app = new Hono<{ Bindings: Bindings }>();
+app.route("/", post);
 
 app.use(
   "/api/*",
@@ -93,6 +95,6 @@ app.post("/api/login", async (c) => {
 });
 
 // Bearer認証を設定
-app.use("/api/auth/*", bearerAuth({ token }));
+app.use("/api/post/*", bearerAuth({ token }));
 
 export default app;
