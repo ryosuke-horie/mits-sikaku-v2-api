@@ -35,13 +35,13 @@ login.post("/login", async (c) => {
   const user = await db
     .select()
     .from(users)
-    .where(and(eq(users.id, 42), eq(users.name, "Dan")));
+    .where(and(eq(users.email, email), eq(users.password, password)));
 
   if (!user) {
     return c.json({ error: "User not found" }, 404);
   }
 
-  return c.json({ token: token }, 200);
+  return c.json({ token: token, user: user }, 200);
 });
 
 export default login;
