@@ -3,6 +3,7 @@
     "dev": "wrangler dev src/index.ts",
     "deploy": "wrangler deploy --minify src/index.ts",
     "lint": "bunx @biomejs/biome check --apply src/*.ts",
+    "db:generate": "bunx drizzle-kit generate:sqlite",
     "db:migrate": "bunx wrangler d1 migrations apply mits-sikaku-db --local",
     "db:migrate:prod": "bunx wrangler d1 migrations apply mits-sikaku-db"
   },
