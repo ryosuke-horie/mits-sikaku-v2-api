@@ -62,4 +62,11 @@ post.options("/", async (c) => {
   return c.json({}, 200);
 });
 
+post.get("/", async (c) => {
+  const db = drizzle(c.env.DB);
+  const allPost = await db.select().from(posts).all();
+
+  return c.json(allPost, 200);
+});
+
 export default post;
