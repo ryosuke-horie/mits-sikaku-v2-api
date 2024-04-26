@@ -15,7 +15,7 @@ post.use("/post/*", bearerAuth({ token: token }));
 
 // 投稿のスキーマをZodで定義
 const postSchema = z.object({
-  user_id: z.number(),
+  user_id: z.string(),
   title: z.string(),
   method: z.string(),
   body: z.string(),
