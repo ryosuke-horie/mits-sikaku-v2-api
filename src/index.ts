@@ -9,18 +9,15 @@ type Bindings = {
 };
 
 const app = new Hono<{ Bindings: Bindings }>().basePath("/api");
-app.route("/", post);
-app.route("/", login);
-app.route("/", signup);
-
 app.use(
-	"/api/*",
+	"*",
 	cors({
 		origin: ["http://localhost:3000"],
 		allowHeaders: [
 			"X-Custom-Header",
 			"Upgrade-Insecure-Requests",
 			"Content-Type",
+			"Authorization",
 		],
 		allowMethods: ["POST", "GET", "OPTIONS"],
 		exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
@@ -28,5 +25,9 @@ app.use(
 		credentials: true,
 	}),
 );
+
+app.route("/", post);
+app.route("/", login);
+app.route("/", signup);
 
 export default app;
