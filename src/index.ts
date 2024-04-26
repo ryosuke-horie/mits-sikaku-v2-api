@@ -5,25 +5,25 @@ import post from "./handlers/post";
 import signup from "./handlers/signup";
 
 type Bindings = {
-  DB: D1Database;
+	DB: D1Database;
 };
 
 const app = new Hono<{ Bindings: Bindings }>().basePath("/api");
 app.use(
-  "*",
-  cors({
-    origin: ["http://localhost:3000"],
-    allowHeaders: [
-      "X-Custom-Header",
-      "Upgrade-Insecure-Requests",
-      "Content-Type",
-      "Authorization",
-    ],
-    allowMethods: ["POST", "GET", "OPTIONS"],
-    exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
-    maxAge: 600,
-    credentials: true,
-  })
+	"*",
+	cors({
+		origin: ["http://localhost:3000"],
+		allowHeaders: [
+			"X-Custom-Header",
+			"Upgrade-Insecure-Requests",
+			"Content-Type",
+			"Authorization",
+		],
+		allowMethods: ["POST", "GET", "OPTIONS"],
+		exposeHeaders: ["Content-Length", "X-Kuma-Revision"],
+		maxAge: 600,
+		credentials: true,
+	}),
 );
 
 app.route("/", post);
