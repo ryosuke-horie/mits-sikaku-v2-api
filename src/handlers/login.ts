@@ -37,8 +37,8 @@ login.post("/login", async (c) => {
     .from(users)
     .where(and(eq(users.email, email), eq(users.password, password)));
 
-  if (!user) {
-    return c.json({ error: "User not found" }, 404);
+  if (!user || user.length === 0) {
+    return c.json({ error: "User not found" }, 403);
   }
 
   return c.json({ token: token, user: user }, 200);
