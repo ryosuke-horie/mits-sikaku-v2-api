@@ -41,7 +41,9 @@ login.post("/login", async (c) => {
     return c.json({ error: "User not found" }, 403);
   }
 
-  return c.json({ token: token, user: user }, 200);
+  const userId = user[0].id;
+
+  return c.json({ token: token, userId: userId }, 200);
 });
 
 export default login;
