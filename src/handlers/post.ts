@@ -58,11 +58,6 @@ post.post("/", async (c) => {
   return c.json(post, 200);
 });
 
-post.options("/", async (c) => {
-  // bearerAuthで許可されたリクエストの場合、200を返す
-  return c.json({}, 200);
-});
-
 post.get("/", async (c) => {
   const db = drizzle(c.env.DB);
   const allPost = await db.select().from(posts).all();
@@ -78,6 +73,16 @@ post.get("/:id", async (c) => {
   const post = await db.select().from(posts).where(eq(posts.id, postId));
 
   return c.json(post, 200);
+});
+
+post.delete("/:id", async (c) => {
+  const db = drizzle(c.env.DB);
+    const id = c.req.param("id");
+    const postId = Number(id);
+
+    const post = await db.delete(posts).where(eq(posts.id, postId));
+
+    return c.json(post, 200);
 });
 
 export default post;
