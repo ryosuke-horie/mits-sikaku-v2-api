@@ -4,6 +4,7 @@ import { token } from "../constants";
 import { drizzle } from "drizzle-orm/d1";
 import { z } from "zod";
 import { posts } from "../schema";
+import { eq } from "drizzle-orm";
 
 type Bindings = {
   DB: D1Database;
@@ -67,6 +68,16 @@ post.get("/", async (c) => {
   const allPost = await db.select().from(posts).all();
 
   return c.json(allPost, 200);
+});
+
+post.get("/:id", async (c) => {
+  const db = drizzle(c.env.DB);
+  const id = c.req.param("id");
+
+  const postId = Number(id);
+  const post = await db.select().from(posts).where(eq(posts.id, postId));
+
+  return c.json(post, 200);
 });
 
 export default post;
