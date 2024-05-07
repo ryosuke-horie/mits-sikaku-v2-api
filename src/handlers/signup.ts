@@ -27,6 +27,11 @@ signup.post("/signup", async (c) => {
     return c.json({ error: "Invalid input data" }, 400);
   }
 
+  // emailのバリデーション ドメインが@mamiya-its.co.jpであること
+  if (!email.endsWith("@mamiya-its.co.jp")) {
+    return c.json({ error: "Invalid email" }, 400);
+  }
+
   const db = drizzle(c.env.DB);
   const user = await db
     .insert(users)
