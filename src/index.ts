@@ -12,7 +12,7 @@ const app = new Hono<{ Bindings: Bindings }>().basePath("/api");
 app.use(
 	"*",
 	cors({
-		origin: ["http://localhost:3000"],
+		origin: ["http://localhost:3000","https://mits-sikaku-v2-frontend.pages.dev"],
 		allowHeaders: [
 			"X-Custom-Header",
 			"Upgrade-Insecure-Requests",
