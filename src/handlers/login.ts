@@ -43,7 +43,10 @@ login.post("/login", async (c) => {
 
   const userId = user[0].id;
 
-  return c.json({ token: token, userId: userId }, 200);
+  // メールアドレスの@より前を取得
+  const name = email.split("@")[0];
+
+  return c.json({ token: token, userId: userId, name: name }, 200);
 });
 
 export default login;
